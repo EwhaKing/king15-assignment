@@ -16,9 +16,8 @@
 
 1. 양식에 맞게 PR을 보낸다.
 2. 과제가 정상제출 처리됐을 시 `checked` label이 붙고 merge된다.
-3. 만약 과제에 개선이 필요할 시 `more enhancement` label이 붙는다.
-4. comment를 보고 과제를 수정한 뒤 `enhancement` label이 붙는다.
-5. 만약 과제에 더 개선이 필요할 시 `enhancement` label이 사라지고(`more enhancement` label은 유지) 수정 요청 comment가 달린다.
+3. 만약 과제에 개선이 필요할 시 `more enhancement` label이 붙으며, 수정 요청 comment가 달린다.
+   : 정상적으로 수정되었을 시, 'checked' label이 붙고 merge된다.
 
 **4. 참고**
 
