@@ -25,8 +25,10 @@
 * 만약 과제를 다시 제출해야 할 경우 PR의 제목 형식을 유지한 채 `enhancement` 태그를 단다.
 * 브랜치에 추가해야 할 커밋이 있을 경우 다시 PR을 날릴 필요 없이 동일 브랜치에 커밋 후 푸시하면 자동으로 PR에 추가된다.
 * 참고 동영상 👇
-[포크&클론.zip](https://github.com/user-attachments/files/19332655/default.zip)
-[upstream설정.zip](https://github.com/user-attachments/files/19332654/upstream.zip)
--> upstream 설정 참고 링크: https://velog.io/@ujeongoh/git-upstream-%EC%9B%90%EA%B2%A9-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
-[풀리퀘스트보내기.zip](https://github.com/user-attachments/files/19332659/default.zip)
+-[포크&클론.zip](https://github.com/user-attachments/files/19332655/default.zip)
+
+-[upstream설정.zip](https://github.com/user-attachments/files/19332654/upstream.zip)
+   -> upstream 설정 참고 링크: https://velog.io/@ujeongoh/git-upstream-%EC%9B%90%EA%B2%A9-%EC%A0%80%EC%9E%A5%EC%86%8C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0--
+
+-[풀리퀘스트보내기.zip](https://github.com/user-attachments/files/19332659/default.zip)
 
