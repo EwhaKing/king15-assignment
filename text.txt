@@ -1,0 +1,51 @@
+리터럴 값은 변경되지 않는 상수 값입니다.
+
+
+암시적으로 형식화된 지역 변수는 var 키워드와 변수 초기화를 사용하여 만들어집니다.
+
+var 키워드는 C#에서 중요한 용도가 있습니다. 많은 경우 변수의 형식은 초기화를 통해 명확해집니다. 
+이러한 경우 var 키워드를 사용하는 것이 더 간단합니다. 또는 var 키워드는 애플리케이션의 코드를 계획할 때도 유용할 수 있습니다. 
+작업에 대한 코드 개발을 시작하면 어떤 데이터 형식을 사용할지 즉시 알 수 없습니다. 
+var를 사용하면 솔루션을 보다 동적으로 개발하는 데 도움이 될 수 있습니다.
+
+3. 다음 중 Console.WriteLine(34.40M);의 출력은 무엇인가요? 
+34.40
+정답입니다! 10진수 리터럴 M 또는 m을(를) 사용하면 10진수 데이터 유형을 나타냅니다. 10진수 값은 표시될 때 소수점 뒤의 값을 포함합니다.
+m을 붙이지 않으면 double로 해석해버림
+
+4. decimal x = 12.3m;
+맞습니다. 할당이 선언된 데이터 형식과 올바르게 일치합니다.
+🔹 float과 double은 반올림 오류가 발생할 수 있지만, decimal은 정확하다, 28~29자리까지 출력
+
+축자 문자열 리터럴은 백슬래시를 이스케이프할 필요 없이 모든 공백과 문자를 유지합니다. 그대로.
+C#
+Console.WriteLine(@"    c:\source\repos    
+        (this is where your code goes)");
+
+Output
+    c:\source\repos    
+        (this is where your code goes)
+
+문자열 보간 {변수명} 
+C#
+string projectName = "First-Project";
+Console.WriteLine($@"C:\Output\{projectName}\Data");
+
+Output
+C:\Output\First-Project\Data
+
+**
+문자 그대로 {}를 출력하려면 **이중 중괄호 {{ }}**를 사용=!
+Console.WriteLine($@"C:\Output\{{projectName}}\Data");
+Output
+C:\Output\{projectName}\Data
+
+
+int fahrenheit = 94;
+decimal celsius = (decimal)(fahrenheit - 32) * (5m / 9m);
+Console.WriteLine($"The temperature is {celsius:F3} Celsius");  //소숫점 셋째까지 출력 
+Console.WriteLine($"The temperature is {(decimal)(fahrenheit-32)*(5m/9m)} Celsius"); //28자리 다 출력
+5m/9m으로 decimal 변경을 해줘야함 
+
+Console.WriteLine(5 / 10); -> 0
+C#은 int 연산에서 소숫점 밑을 버림 
