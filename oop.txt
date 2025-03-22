@@ -1,0 +1,103 @@
+추상화
+추상화를 사용하면 복잡한 구현 세부 사항을 숨기고 사용자가 상호 작용할 수 있는 단순화된 데이터 속성 및 메서드 집합을 노출할 수 있습니다. 
+이는 사용자와 객체 또는 시스템의 내부 작동 사이의 경계 역할을 합니다.
+
+캡슐화
+캡슐화는 데이터(속성)와 해당 데이터에서 작동하는 메서드(함수)를 단일 단위인 클래스로 묶는 프로세스입니다.
+이 단위는 데이터가 저장되거나 처리되는 방법에 대한 내부 세부 정보를 숨기고 상호 작용을 위한 잘 정의된 인터페이스만 노출합니다.
+
+상속
+상속은 한 클래스가 다른 클래스의 속성과 동작을 획득하는 메커니즘입니다.
+기존 클래스를 기반으로 부모 클래스의 속성과 메서드를 재사용하여 새 클래스를 만들 수 있습니다.
+
+다형성
+다형성은 서로 다른 클래스의 객체를 공통 슈퍼클래스의 객체로 취급할 수 있게 해줍니다. 
+다형성을 사용하면 여러 유형의 객체와 작동하는 코드를 작성할 수 있어 유연성과 확장성을 제공합니다.
+
+
+struct is used as a container for a small set of related variables
+public struct Coords
+{
+    public int x, y;
+
+    public Coords(int p1, int p2)
+    {
+        x = p1;
+        y = p2;
+    }
+}
+
+enum 정수형(int, byte, short 등) 열거
+public enum FileMode
+{
+    CreateNew = 1,
+    Create = 2,
+    Open = 3,
+    OpenOrCreate = 4,
+    Truncate = 5,
+    Append = 6,
+}
+Console.Write(FileMode.Append);   // 출력: Append 
+ㄴ이유: 내부적으로 FileMode.Append.ToString()이 호출됨. Console.Write때문
+Console.Write((int)FileMode.Append); //출력: 6
+
+만약 문자열 enum:
+enum Color { Red, Green, Blue }
+Red → 0 (자동 할당)
+Green → 1
+Blue → 2
+---------
+enum Color { Red = 5, Green, Blue }
+Red → 5
+Green → 6 (자동 증가)
+Blue → 7 (자동 증가)
+
+public class Phone
+{
+    public string? Brand { get; set; }  
+string? : 널 허용
+get; set; 속성에 붙는 메서드
+속성 초기화는 생성자 내에서 초기화 
+-> public phone(){Brand="good"}
+람다표현식-> public phone() => Brand="good"; //한줄짜리 생성자일 때
+ ㄴ생성자 안에서 Console.Write 쓰면 객체 생성될 때 실행됨
+    public int Year { get; set; }
+    public void Text(string phoneNumber, string message)
+    {
+        Console.WriteLine($"Texting {phoneNumber}: {message}");
+    }
+}
+
+
+정적 생성자// Static constructor, 정적 데이터를 초기화하고 처음에 한번만 수행
+    static Person()
+    {
+        // Static field initialization
+        defaultName = "unknown";
+        defaultAge = "unknown";
+    }
+매개변수X, 상속•오버로드X, 첫번째 인스턴스 생성자보다 먼저 자동 호출&실행
+정적 생성자 없으면 정적 필드는 기본값으로 초기화 
+-> public static int cnt;  여기서 cnt는 0으로 자동 초기화
+
+ 정적 필드 > 정적 생성자 > 인스턴스 생성자 순으로 실행됨
+
+필드변수와 매개변수의 이름이 같으면 this로 명확하게 구분(다르면 this필요X)
+public class BankAccount
+{
+    public string CustomerId; //필드변수
+    public BankAccount(string CustomerId)  // 매개변수와 필드 이름이 같음
+    {
+        this.CustomerId(필드) = CustomerId(매개변수); 
+    }
+}
+
+
+
+
+
+
+
+
+
+
