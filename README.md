@@ -26,3 +26,9 @@
 * 브랜치에 추가해야 할 커밋이 있을 경우 다시 PR을 날릴 필요 없이 동일 브랜치에 커밋 후 푸시하면 자동으로 PR에 추가된다.
 
 **5. 참고 동영상**
+* 포크 & 클론: https://github.com/user-attachments/assets/d8783afc-6760-40dc-b345-f28ad8fa0beb
+* 업스트림설정: https://github.com/user-attachments/assets/d2254555-6129-42a5-8b81-0ebb6fdb1074
+* 풀리퀘: [풀리퀘.zip](https://github.com/user-attachments/files/19333213/default.zip)
+
+
+
