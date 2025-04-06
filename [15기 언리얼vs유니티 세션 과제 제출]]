@@ -88,3 +88,71 @@ class Program
         //클래스는 위에것처럼 두 개 이상의 생성자를 가질 수 있고, 일반적으로 다른 인수를 취함
     }
 }
+
+
+//BankAccount연습
+//Classes_M1.cs
+using System;
+
+namespace Classes_M1;
+
+public class BankCustomer
+{
+    public string First_name = "Tim";
+    public string Last_name = "Shao";
+    public readonly string customer_id;
+    //readonly는 선언/생성자에서 값을 할당할 수 있는 필드를 선언하는데에 사용
+
+    private static int s_next_customer_id;
+    //고유한 ID 주소
+   static BankCustomer() //public 필드는 외부에서 접근가능
+    {
+        Random rnd = new Random();
+        s_next_customer_id = rnd.Next(100000,200000);
+    }
+
+    public BankCustomer()
+    {
+        this.customer_id = s_next_customer_id.ToString("D10");
+        //이미 할당된 고객 id num으로 다음꺼를 할당해서 고유하게 만드는?작업?
+    }
+
+    
+    public BankCustomer(string firstName, string lastName)
+    {
+        First_name= firstName;
+        Last_name= lastName;
+        this.customer_id = (s_next_customer_id++).ToString("D10");
+    }
+
+    
+    public BankCustomer(string first_name, string last_name, string customer_idnum)
+    {
+        First_name = first_name;
+        Last_name = last_name;
+        customer_id = customer_idnum;
+    }
+}
+
+//Program.cs
+using Classes_M1;
+// 이를 통해 Program.cs 파일 내에서 클래스에 액세스 가능
+
+BankCustomer customer1 = new BankCustomer();
+string first_name = "Tim";
+string last_name = "Shao";
+//string customer_idnum = "10101010";
+
+first_name = "Lisa";
+BankCustomer customer2 = new BankCustomer(first_name, last_name);
+
+first_name = "Sandy";
+last_name = "Zoeng";
+//customer_idnum = "20202020";
+BankCustomer customer3 = new BankCustomer(first_name, last_name);
+
+
+Console.WriteLine($"BankCustomer 1: {customer1.First_name} {customer1.Last_name} {customer1.customer_id}");
+Console.WriteLine($"BankCustomer 2: {customer2.First_name} {customer2.Last_name} {customer2.customer_id}");
+Console.WriteLine($"BankCustomer 3: {customer3.First_name} {customer3.Last_name} {customer3.customer_id}");
+
