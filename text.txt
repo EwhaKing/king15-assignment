@@ -49,3 +49,21 @@ Console.WriteLine($"The temperature is {(decimal)(fahrenheit-32)*(5m/9m)} Celsiu
 
 Console.WriteLine(5 / 10); -> 0
 C#은 int 연산에서 소숫점 밑을 버림 
+
+
+
+bool isBadCondition= health<=50 && mana<=20; //이렇게 식으로 해도 됨
+bool isFullLevel= level == fullLevel; //식22
+
+switch(monsters[1]){
+case "슬라임":
+case "사막뱀":  //같은 케이스
+monsterAlarm="소형몬스터 출현";
+case:"악마":
+monsterAlarm="중형몬스터 출현";
+}
+
+
+foreach(string monster in monsters){ //monsters: 배열
+Debug.log("여기 있는 몬스터: "+monster);
+}
