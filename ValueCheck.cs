@@ -25,3 +25,4 @@ Console.WriteLine($"uint   : {uint.MinValue} to {uint.MaxValue}");
 Console.WriteLine($"ulong  : {ulong.MinValue} to {ulong.MaxValue}");
 
 FloatCheck.PrintFloating();
+VariableDef.PrintDefining();
