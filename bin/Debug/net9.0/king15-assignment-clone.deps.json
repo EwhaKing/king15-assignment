@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "king15-assignment-clone/1.0.0": {
+        "runtime": {
+          "king15-assignment-clone.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "king15-assignment-clone/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
