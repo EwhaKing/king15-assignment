@@ -1,57 +1,56 @@
-# Unity 기본 조작 및 물리 엔진
+~씬 둘러보기~
 
-## 씬 둘러보기
+플라이스루: 씬 날면서 둘러보기
+오른쪽마우스+ w/a/s/d, Q/R
 
-- **플라이스루**: 씬을 날면서 둘러보는 방법  
-  - **오른쪽 마우스 + W/A/S/D, Q/R**로 이동
-  - **Shift** 키를 누르면 더 빠르게 이동
+더 빠르게 움직이려면 shift까지 누르기
 
-- **포커스**: 
-  - Hierarchy 창에서 게임 오브젝트를 선택 후 **F**를 누르면 그 오브젝트에 포커스
+포커스: hierarchy창에서 게임오브젝트 선택 후 F누르면 그것으로 focus
 
-- **조작 순서 (QWERTY)**:
+조작 순서대로 QWERTY
 
-- **ALT + RSM**: 카메라 돌리기
-- **ALT + LSM**: 카메라 줌인/줌아웃
+ALT+ RSM= 카메라 돌리기
+ALT+ LSM= 카메라 줌인아웃
 
-- **마우스 오른쪽/왼쪽 버튼 + ALT, WASD, Q, E**: 뷰 조작 가능
-- **Shift**: 빠른 이동
+마우스 오른/왼과 alt, wasd, qe 누르면 뷰 조작 가능, shift는 달리기
 
 
-## 카메라
 
-- **직교 카메라**: 원근법이 적용되지 않음.
-- **원근 카메라**: 원근법이 적용됨.  
-  - **시야각 (Field of View)**: 시야 설정, FoV가 클수록 시야가 넓어짐.
-- **물리적 카메라**: 실사 영상 및 영화 같은 느낌을 제공.
+~카메라~
 
-### 물리적 카메라 조정:
-- 카메라의 **Projection**을 **Perspective**로 설정 후 **Physical Camera** 체크
-- 물리적 카메라는 다음 두 가지 설정으로 범위를 조정할 수 있음:
-  - **Sensor Size**: 필름 카메라와 센서 크기를 일치시킴
-  - **Focal Length**: 렌즈와 센서 사이의 거리
+직교카메라: 원근법X
+원근카메라: 원근법O, 시야각(Field of View)으로 시야 설정. FoV가 클수록 시야가 넓어짐
 
-- **Sensor Size, FoV, Focal Length**를 조정하여 물리적 카메라를 세밀하게 설정
+물리적 카메라: 실사 영상, 영화 같은 느낌을 줄 때
 
+카메라 Projection을 Perspective로 설정, Physical Camera 체크
 
-## 물리 엔진
+이미지가 렌더링(또는 "촬영")되는 영역의 물리적 크기인 Sensor Size, 렌즈와 필름/센서 사이의 거리인 Focal Length
 
-- **충돌이 인식되려면**: 게임 오브젝트에 **Rigidbody** 컴포넌트가 있어야 함
-- 게임 오브젝트가 물리 엔진의 영향을 받으려면 **Collider** 컴포넌트를 추가해야 함
-  - **Collider의 Is Trigger**: 체크하면 해당 오브젝트가 다른 오브젝트를 통과할 수 있음
-  - **Rigidbody의 Is Kinematic**: 체크하면 다른 오브젝트에 영향을 주지만, 자신은 영향을 받지 않음
-  - **Rigidbody의 충돌 점검 방식**: 충돌 점검 속도 및 방식 설정 가능
-    - 충돌 점검 방식: None / Interpolate / Extrapolate  (extra가 더 매끄러움)
-    - 충돌 점검 속도: Discrete / Continuos(정적과 빠른이가 상호작용) / Continuos dynamic(빠른이와 빠른이) / Continuos Speculative(예측 기반)
-
-- **Rigidbody의 Constraints**: X, Y, Z축 고정 가능
+Sensor size, FoV, Focal length 셋 다 조절하며 물리적 카메라 조정
 
 
-### 물리 엔진의 설정:
-- `Project Settings > Physics`에서 물리 엔진의 요소를 설정할 수 있음
+~물리엔진~
+
+충돌이 인식되려면 게임 오브젝트에 Rigidbody 컴포넌트가 연결되어 있어야 함
+
+게임 오브젝트가 물리 엔진의 영향을 받게 하려면 Collider 컴포넌트를 추가해야 함
+
+Collider의 Is Trigger: 체크하면 그 오브젝트를 다른 오브젝트가 통과할 수 있고 collider 영역에 들어가거나 나올 때 이벤트 호출 가능
+
+Rigidbody의 Is Kinematic: 체크하면 다른 오브젝트에 영향을 주지만 자신이 영향 받지는 않음
++에니메이션 엔진 vs 물리 엔진 제어권 설정할 때도 씀
+
+Rigidbody의 충돌 점검 방식, 충돌 점검 속도를 설정할 수 있음
+충돌 점검 방식: None / Interpolate / Extrapolate (extra가 더 매끄러움)
+충돌 점검 속도: Discrete / Continuos(정적과 빠른이가 상호작용) / Continuos dynamic(빠른이와 빠른이) / Continuos Speculative(예측 기반)
+
+Rigidbody의 Constraints: X,Y,Z축 고정할 수 있음
+
++Project Settings > Physics에서 물리엔진의 요소 설정 가능
 
 
-## 물리 엔진의 스크립트
+~물리엔진의 스크립트~
 
 Collider 함수들로 다른오브젝트와 상호작용
  OnCollisionEnter (Collision){ } : 충돌 인식 시
@@ -126,16 +125,4 @@ Info.point/ .collider / .distance 등의 정보
 예) you want Layer 1 to collide with Layer 2 and 3, but not with Layer 1
 =layer는 같은 종류의 오브젝트들을 묶어서 관리함. 
 =결국 레이어들 간의 충돌 관계는 어떤 오브젝트 종류와 충돌이 가능하게 할 건지 정하는 것과 같음. 그리고 이걸 project settings > physics > settings > Layer Collision Matrix에서 결정
-
-
-
-
-
-
-
-
-
-
-
-
 
