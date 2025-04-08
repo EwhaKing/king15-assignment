@@ -23,3 +23,5 @@ Console.WriteLine($"ushort : {ushort.MinValue} to {ushort.MaxValue}");
 Console.WriteLine($"uint   : {uint.MinValue} to {uint.MaxValue}");
 //Unsigned 64bit integral
 Console.WriteLine($"ulong  : {ulong.MinValue} to {ulong.MaxValue}");
+
+FloatCheck.PrintFloating();
