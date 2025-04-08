@@ -1,0 +1,141 @@
+# Unity 기본 조작 및 물리 엔진
+
+## 씬 둘러보기
+
+- **플라이스루**: 씬을 날면서 둘러보는 방법  
+  - **오른쪽 마우스 + W/A/S/D, Q/R**로 이동
+  - **Shift** 키를 누르면 더 빠르게 이동
+
+- **포커스**: 
+  - Hierarchy 창에서 게임 오브젝트를 선택 후 **F**를 누르면 그 오브젝트에 포커스
+
+- **조작 순서 (QWERTY)**:
+
+- **ALT + RSM**: 카메라 돌리기
+- **ALT + LSM**: 카메라 줌인/줌아웃
+
+- **마우스 오른쪽/왼쪽 버튼 + ALT, WASD, Q, E**: 뷰 조작 가능
+- **Shift**: 빠른 이동
+
+
+## 카메라
+
+- **직교 카메라**: 원근법이 적용되지 않음.
+- **원근 카메라**: 원근법이 적용됨.  
+  - **시야각 (Field of View)**: 시야 설정, FoV가 클수록 시야가 넓어짐.
+- **물리적 카메라**: 실사 영상 및 영화 같은 느낌을 제공.
+
+### 물리적 카메라 조정:
+- 카메라의 **Projection**을 **Perspective**로 설정 후 **Physical Camera** 체크
+- 물리적 카메라는 다음 두 가지 설정으로 범위를 조정할 수 있음:
+  - **Sensor Size**: 필름 카메라와 센서 크기를 일치시킴
+  - **Focal Length**: 렌즈와 센서 사이의 거리
+
+- **Sensor Size, FoV, Focal Length**를 조정하여 물리적 카메라를 세밀하게 설정
+
+
+## 물리 엔진
+
+- **충돌이 인식되려면**: 게임 오브젝트에 **Rigidbody** 컴포넌트가 있어야 함
+- 게임 오브젝트가 물리 엔진의 영향을 받으려면 **Collider** 컴포넌트를 추가해야 함
+  - **Collider의 Is Trigger**: 체크하면 해당 오브젝트가 다른 오브젝트를 통과할 수 있음
+  - **Rigidbody의 Is Kinematic**: 체크하면 다른 오브젝트에 영향을 주지만, 자신은 영향을 받지 않음
+  - **Rigidbody의 충돌 점검 방식**: 충돌 점검 속도 및 방식 설정 가능
+    - 충돌 점검 방식: None / Interpolate / Extrapolate  (extra가 더 매끄러움)
+    - 충돌 점검 속도: Discrete / Continuos(정적과 빠른이가 상호작용) / Continuos dynamic(빠른이와 빠른이) / Continuos Speculative(예측 기반)
+
+- **Rigidbody의 Constraints**: X, Y, Z축 고정 가능
+
+
+### 물리 엔진의 설정:
+- `Project Settings > Physics`에서 물리 엔진의 요소를 설정할 수 있음
+
+
+## 물리 엔진의 스크립트
+
+Collider 함수들로 다른오브젝트와 상호작용
+ OnCollisionEnter (Collision){ } : 충돌 인식 시
+OC Stay : 충돌 중
+OC Exit : 충돌 정지
+
+예)
+void OnCollisionEnter(Collision collision){    - - > 여기서 매개변수는 충돌한 다른 게임오브젝트. collision.name등으로 참조 가능
+    if(collision.gameObject.CompareTag("Enemy"){
+             //hit the enemy
+     }
+}
+
+Rigidbody의 함수   
+bool rigidbody.useGravity : 중력 비/활성화(true) 
+rb.AddForce(Vector3) : 특정 방향으로 힘 추가
+rb.AddTorque(Vector3, Force Mode): 축 주위에 회전력 추가
+
+예) rb.AddTorque(Vector3.up * torqueStrength, ForceMode.Impulse);
+
+
+*Vector3: (0,0,0) x,y,z축
+Vector3.zero/ .up(0,1,0) / .right(1,0,0) / .forward(0,0,1)
+예) Vector3 position = new Vector3(10,0,5);
+
+*Force Mode: 힘 적용 방식
+ForceMode.Force(지속적인 힘-ex.중력) / .Impulse(순간적인 힘-ex.폭발, 순간이동) / 
+.VelocityChange(오브젝트의 질량을 고려하지 않고 속도만 즉시 변화시킴) / 
+.Acceleration(오브젝트의 질량을 고려하지 않고 일정하게 가속)
+
+
+
+~Update 함수~
+Update: 프레임당 한 번 호출됨
+FixedUpdate: 프레임당 여러 번 호출됨. 고정된 간격을 두고 계산이 수행됨
+물리 계산의 대부분은 FixedUpdate에서 호출됨. 
+
+
+커스텀 Physic Material: Friction, Bounciness를 커스텀하여 게임오브젝트에 추가할 수 있다
+
+
+~Joint 컴포넌트~
+Joint는 Rigidbody에 힘을 가해 움직이도록 한다, Rigidbody의 움직임 제어
+
+Character Joint: 캐릭터의 관절과 비슷. 자유도에 따라 고정된 범위 내에서 움직임 ex) 사람 목은 360도 돌아가지 않는다
+Configurable Joint: 자유도 관계X ex) 인형 팔은 다 꺾인다
+Fixed Joint: 오브젝트 두 개의 움직임을 연결해서 같이 움직임
+Hinge Joint: 두 개의 Rigidbody를 묶어 Rigidbody가 Anchor에서 특정 axis를 중심으로 회전하게 함
+Spring Joint: 두 Rigidbody사이에 탄성력 추가, 스프링처럼 작용(거리 가변) ex) 흔들다리
+
+
+~레이캐스팅~ 
+Raycasting-빛던짐. 오브젝트 간 빛이나 보이지 않는 연결을 캐스트함
+
+origin: 광선의 시작점
+direction: 광선의 방향
+maxDistance: 광선의 충돌을 검사하는 최대 거리
+layerMask: 광선을 캐스트할 때 콜라이더를 선택적으로 무시하는 데 사용하는 레이어 마스크
+queryTriggerInteraction: 해당 쿼리의 트리거 충돌 여부를 지정
+
+예)
+Physics.Raycast (Vector3 Origin, Vector3 Direction, RaycastHit Info, float Distance, int Layermask)
+
+ㄴRaycastHit Info: 광선이 충돌한 지점의 정보를 담는 RaycastHit 객체
+Info.point/ .collider / .distance 등의 정보
+
+
+~레이어와 레이어들 간의 충돌~
+게임오브젝트의 기본 레이어에 기본 동작이 할당되면 비효율적임 -> 새 레이어에 오브젝트 할당
+이런 레이어들 간의 충돌 관계는 충돌 매트릭스에 따라 결정됨
+
+예) you want Layer 1 to collide with Layer 2 and 3, but not with Layer 1
+=layer는 같은 종류의 오브젝트들을 묶어서 관리함. 
+=결국 레이어들 간의 충돌 관계는 어떤 오브젝트 종류와 충돌이 가능하게 할 건지 정하는 것과 같음. 그리고 이걸 project settings > physics > settings > Layer Collision Matrix에서 결정
+
+
+
+
+
+
+
+
+
+
+
+
+
