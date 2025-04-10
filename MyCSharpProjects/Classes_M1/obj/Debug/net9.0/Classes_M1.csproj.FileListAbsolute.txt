@@ -1,0 +1,14 @@
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\bin\Debug\net9.0\Classes_M1.exe
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\bin\Debug\net9.0\Classes_M1.deps.json
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\bin\Debug\net9.0\Classes_M1.runtimeconfig.json
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\bin\Debug\net9.0\Classes_M1.dll
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\bin\Debug\net9.0\Classes_M1.pdb
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.GeneratedMSBuildEditorConfig.editorconfig
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.AssemblyInfoInputs.cache
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.AssemblyInfo.cs
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.csproj.CoreCompileInputs.cache
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.dll
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\refint\Classes_M1.dll
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.pdb
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\Classes_M1.genruntimeconfig.cache
+D:\KING.Csharp\Csharp-MSlearn\MyCSharpProjects\Classes_M1\obj\Debug\net9.0\ref\Classes_M1.dll
