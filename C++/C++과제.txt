@@ -1,0 +1,364 @@
+1.  Statements
+
+참고 링크: https://en.cppreference.com/w/cpp/language/statements
+
+[1] Statements
+
+C++에서 statement(문장)는 실행 가능한 코드의 기본 단위
+
+대부분 세미콜론(;)으로 끝남
+
+제어 흐름, 변수 선언, 반복, 분기 등을 담당
+
+[2] 주요 Statement 종류
+
+(1) Expression statement (표현식 문장)
+
+끝에 세미콜론을 붙여 표현식을 문장으로 만듦
+예: x = 5;, func();, a + b; (마지막은 쓸모 없는 문장)
+
+(2) Compound statement (복합문)
+
+여러 문장을 중괄호 {}로 묶음
+
+(3) Selection statements (선택문)
+
+조건에 따라 분기
+
+if (condition) statement [else statement]
+
+switch (expression) { case ... }
+
+(4) Iteration statements (반복문)
+
+특정 조건 동안 반복 수행
+
+while (condition) statement
+
+do statement while (condition);
+
+for (init; condition; increment) statement
+
+range-based for (for-each)
+예: for (int x : container)
+
+(5) Jump statements (분기/이동문)
+
+흐름을 다른 곳으로 이동시킴
+
+break; → 반복문이나 switch 탈출
+
+continue; → 현재 루프 건너뛰고 다음 반복
+
+return expr; → 함수 종료
+
+goto label; → 지정한 위치로 점프 (지양됨)
+
+(6) Declaration statement (선언문)
+
+변수나 타입을 선언하는 문장
+예: int x = 0;, std::string s;
+
+(7) Try-catch statement (예외 처리)
+
+try {
+    // 예외 발생 가능 코드
+} catch (const std::exception& e) {
+    // 예외 처리
+}
+
+Try-catch문 사용해 예외 처리 
+
+(8) Core language statement extensions
+
+C++20 기준으로는 co_return, co_yield 같은 코루틴 관련 문장도 포함됨 (심화 내용)
+
+[3] 주의사항 
+
+C++에서 문장은 반드시 하나 이상의 작업 단위를 구성
+
+복합문은 하나의 문장으로 간주되기 때문에 if, for 등에서 중괄호로 묶는 습관이 중요
+
+break, continue, return의 사용 위치에 따라 프로그램의 흐름이 크게 바뀜
+
+goto는 매우 제한적으로만 사용하고, 가능한 피하는 것이 좋음
+
+C++에서는 Range-based for문을 사용, 컨테이너를 직접 순회할 수 있음
+
+Try-catch 예외 처리 구문은 C에는 없지만 C++에서만 사용할 수 있음. 
+
+
+2. Iterators
+
+참고 링크: https://en.cppreference.com/w/cpp/iterator
+
+[1] Iterators
+
+Iterator는 컨테이너의 요소를 순차적으로 접근할 수 있게 해주는 객체
+
+포인터처럼 동작하며 *, ++, -- 등의 연산자를 통해 원소 접근 및 이동 가능
+
+표준 컨테이너(vector, list 등)는 모두 iterator를 제공함
+
+[2] 주요 구성 요소
+
+(1) Iterator categories (반복자 분류)
+반복자는 기능에 따라 다섯 가지로 나뉨:
+
+InputIterator
+
+단방향으로 한 번만 읽기 가능
+
+예: istream_iterator
+
+OutputIterator
+
+단방향으로 한 번만 쓰기 가능
+
+예: ostream_iterator, std::back_inserter
+
+ForwardIterator
+
+여러 번 읽기 가능, 전진만 가능
+
+예: std::forward_list의 iterator
+
+BidirectionalIterator
+
+전진과 후진 모두 가능
+
+예: std::list의 iterator
+
+RandomAccessIterator
+
+임의 접근 가능 (인덱스 연산 가능)
+
+예: std::vector, std::deque의 iterator
+
+ContiguousIterator (C++17)
+
+메모리 상 연속된 요소 접근 가능
+
+RandomAccessIterator의 특수한 형태
+
+예: std::vector::iterator, std::array::iterator
+
+(2) Iterator adaptors (반복자 어댑터)
+
+기존 반복자에 기능을 덧붙이거나 동작을 변경
+
+대표적인 adaptors:
+
+std::reverse_iterator : 역순 순회
+
+std::move_iterator : 이동 시맨틱 적용
+
+std::back_insert_iterator : push_back를 통해 요소 삽입
+
+std::insert_iterator : insert를 통해 삽입
+
+std::istream_iterator, std::ostream_iterator : 스트림 입출력용
+
+(3) Iterator utilities (도우미 함수들)
+
+std::begin, std::end : 컨테이너의 반복자 시작과 끝 반환
+
+std::next(it, n), std::prev(it, n) : 반복자 이동
+
+std::advance(it, n) : 반복자를 n만큼 이동시키되 void 반환
+
+std::distance(first, last) : 두 반복자 사이 거리 반환
+
+[3] 반복자의 핵심 개념
+
+반복자는 C++ 표준 알고리즘의 기반이며, std::sort, std::find 등에서 반복자를 사용
+
+컨테이너 내부 구조를 몰라도 반복자를 통해 모든 요소 접근 가능
+
+auto it = v.begin(); 식으로 반복자 사용 가능 
+
+[4] 주의사항
+
+반복자의 연산 가능 여부는 category에 따라 다름
+
+std::vector::iterator는 RandomAccess이자 Contiguous
+
+std::list::iterator는 Bidirectional
+
+iterator는 컨테이너와 동일한 라이프타임을 가질 것처럼 사용해야 함
+(컨테이너가 변경되면 반복자 무효화 가능)
+
+
+
+
+
+3. Algorithms library
+
+참고 링크: https://en.cppreference.com/w/cpp/algorithm
+
+[1] Algorithms library
+
+<algorithm>은 C++ 표준 라이브러리에서 범용 알고리즘 함수들을 제공하는 헤더.
+
+대부분 이터레이터 범위를 인자로 받아 컨테이너에 독립적으로 동작함.
+
+
+[2] 주요 알고리즘 분류 
+(1) Non-modifying sequence operations (읽기 전용)
+
+all_of, any_of, none_of : 조건 만족 여부 검사
+
+for_each : 각 요소에 함수 적용
+
+find, find_if, find_if_not : 특정 조건의 원소 찾기
+
+count, count_if : 조건에 맞는 개수 세기
+
+mismatch, equal : 두 범위 비교
+
+search, search_n : 부분 시퀀스 검색
+
+(2) Modifying sequence operations (데이터 변경)
+
+copy, copy_if : 조건에 따라 복사
+
+move, swap, swap_ranges : 이동과 교환
+
+fill, generate : 범위에 값 채우기
+
+replace, transform, remove 등
+
+(3) Sorting & Order
+
+sort, stable_sort : 정렬
+
+partial_sort, nth_element : 부분 정렬
+
+is_sorted, is_sorted_until : 정렬 상태 확인
+
+(4) Binary search related (정렬된 컨테이너 전용)
+
+binary_search, lower_bound, upper_bound, equal_range
+
+(5) Set operations (정렬 필수)
+
+set_union, set_intersection, set_difference, set_symmetric_difference
+
+모두 정렬된 범위에서만 작동
+
+(6) Heap operations
+
+make_heap, push_heap, pop_heap, sort_heap
+
+기본적으로 max-heap 기준
+
+(7) Minimum/maximum
+
+min, max, minmax, clamp
+
+min_element, max_element, minmax_element
+
+(8) Permutations
+
+next_permutation, prev_permutation
+
+사전 순으로 순열을 변경
+
+(9) Numeric operations (추가적으로 <numeric> 필요)
+
+accumulate, reduce, inner_product, adjacent_difference, exclusive_scan 등
+
+[3] 주의사항
+
+대부분의 함수는 범위를 [first, last) 형태로 받음 (last는 포함하지 않음)
+
+커스텀 비교자(comparator)를 넘겨서 동작 방식 지정 가능
+
+정렬이 요구되는 함수는 컨테이너가 정렬된 상태임을 보장해야 정확하게 작동
+
+
+
+
+
+
+4. Diagnostics library
+
+참고 링크: https://en.cppreference.com/w/cpp/error
+
+[1] Diagnostics library
+
+<error>는 C++에서 런타임 오류와 예외 처리를 위한 다양한 클래스와 매크로를 정의하는 헤더는 아니지만, cppreference에서는 C++ 표준 라이브러리에서 오류 및 예외와 관련된 모든 요소들을 한 페이지에 정리해 놓음.
+
+예외 관련 기본 클래스들/ 시스템 오류 처리/ noexcept, exception specifications, assert, errno 등과 같은 C 스타일 오류 처리 도구들
+
+[2] 주요 내용 정리
+
+(1) 예외 클래스 계층 구조 (exception hierarchy)
+
+std::exception: 모든 표준 예외 클래스의 기본 클래스
+
+주요 파생 클래스:
+
+std::logic_error
+
+invalid_argument
+
+domain_error
+
+length_error
+
+out_of_range
+
+std::runtime_error
+
+range_error
+
+overflow_error
+
+underflow_error
+
+(2) 예외 처리 구문
+
+try, catch, throw 키워드를 사용
+
+(3) noexcept
+
+함수가 예외를 던지지 않는다고 명시하는 키워드
+
+컴파일러 최적화에 도움을 줌
+
+함수 선언 시 사용: void func() noexcept;
+
+조건부 noexcept 사용 가능: noexcept(condition)
+
+(4) system_error 및 관련 클래스들
+
+std::system_error: 시스템 수준 오류 표현
+
+std::error_code, std::error_condition: 오류 코드 표현을 위한 클래스
+
+std::error_category: 오류 분류
+
+std::generic_category(), std::system_category() 등
+
+(5) C 스타일 오류 처리
+
+errno: 오류 발생 시 전역 오류 번호
+
+assert: 디버그용 조건 검사, 실패 시 프로그램 종료
+
+perror(), strerror(): 오류 메시지 출력에 사용
+
+[3] 주의사항
+
+모든 예외는 기본적으로 std::exception을 상속
+
+가능한 경우 C 스타일 오류 처리보다 C++ 예외 클래스를 사용할 것
+
+noexcept는 예외 안정성과 최적화에 중요한 역할
+
+system_error 계열은 파일 입출력, 네트워크 등 시스템 호출 실패 시 사용
+
+
+
+
