@@ -1,0 +1,130 @@
+=================================
+abstraction 추상화
+encapsulation 캡슐화
+inheritance 상속
+polymorphism 다형성
+
+- 클래스(class): 객체를 만들기 위한 설계도
+ex) class Dog:
+- 인스턴스(instance): 클래스를 기반으로 실제로 생성된 객체
+ex) dog1 = Dog()
+
+- 클래스 라이브러리: 기본 제공 유형... 내장형 유형
+- 사용자 정의 유형: .NET 클래스 라이브러리는 이 유형... "어셈블리"에 프로젝트 참조 명시 시 클래스 라이브러리 이외의 유형 사용 가능... 컴파일러가 어셈블리에 대한 참조를 가지면 소스 코드에서 해당 선언된 형식의 변수, 상수 선언 가능
+
+=================================
+CTS
+값 유형(value): struct 키워드. 기본 제공 숫자 유형...
+
+참조 유형(reference): class 또는 record 키워드. 
+두 유형은 컴파일 타임 규칙/런타임 동작에서 차이를 보임.
+
+- 값 유형 종류
+1. 구조체(structs)
+System.ValueType에서만 상속받을 수 있음. 값 유형이 봉인된다.
+2. 열거형(enums)
+정수 상수 집합. 모든 enums는 System.ValueType을 상속한 System.Enum을 상속하게 된다. structs에 적용되는 모든 규칙은 enums에도 적용된다.
+
+- 참조 유형 종류
+1. class
+2. record
+3. delegate
+4. array
+5. interface
+ex) int[] numbers; -> 값을 할당할 때까지 null 상태로 존재
+*** 값 유형은 값이 바로 할당되고 참조 유형은 값이 할당될 때까지 null으로 존재한다고 이해하면 되나? 그래서 enums가 structs에 포함되는 개념인 것 같고...
+*** 참조(reference)는 객체의 위치를 가리키는 포인터, 인스턴스는 실제 객체, 클래스는 틀...
+연산자 new는 인스턴스를 생성하고 해당 인스턴스에 대한 참조를 반환한다. 참조 유형 변수를 다른 변수에 할당하면 객체 자체가 아닌 참조를 복사한다.
+
+=================================
+객체 속성과 메서드(동작)은 클래스에 의해 정의됨.
+객체(클래스의 인스턴스) 청사진을 제공하는 것이 클래스. 
+컴퓨터는 청사진을 사용하여 객체에 적합한 크기의 메모리 블록 구성. 그러니 객체는 기본적으로 메모리 블록.
+
+- 클래스 속성
+동일한 유형의 객체와 다른 객체를 구별하는 데이터를 관리.
+get: 속성 값 읽음
+set: 속성 값 할당
+
+- 클래스 메서드
+클래스가 수행할 수 있는 동작 정의
+*** Console이라는 클래스는 WriteLine, ReadLine, Clear... 등의 메서드(methods)를 가지고 있음. 
+메서드를 동작시키기 위해서는 
+Console.WriteLine(%"Calling {phoneNumber}");
+....와 같은 형태로 작성해야됨.
+
+=================================
+네임스페이스: 이름 충돌 방지 및 코드 정리 역할. 클래스 및 메서드 이름의 범위를 제어하기 위해 네임스페이스 사용. .NET 클래스 라이브러리도 네임스페이스를 사용함.
+
+ex) 
+System.Console.WriteLine("Hello World!");
+System: 네임스페이스, Console: 해당 네임스페이스의 클래스
+
+코드 가독성을 개선하기 위해 using 지시문 사용 가능.
+ex) 
+using System;
+Console.WriteLine("Hello World!");
+
+=================================
+클래스 생성자의 종류...
+* 생성자(constructor): 객체 생성 시 런타임에 이해 자동 호출되는 특수 메서드. 인스턴스 초기화&유효성 체크에 이용. 클래스 이름과 동일한 이름을 가진다.
+
+- 인스턴스 생성자
+객체가 생성될 때 인스턴스 필드의 생성&초기화에 사용
+클래스와 동일한 이름 사용. 반환 유형 X
+ex) public class Person {
+	public Person() { //이게 생성자
+	}
+}
+이런 식으로... 여기서 public Person()이 생성자임.
+이 경우 매개변수가 존재하지 않는 생성자.
+
+* 매개변수(parameter): 함수에서 괄호 안에 선언하는 변수
+ex) function(x, y) : 매개변수 x, y
+*** Person person1 = new Person(); 여기서 Person() 이게 생성자를 호출하는 코드였던듯
+
+생성자의 매개변수는 클래스의 데이터 필드를 초기화(initialize) 하는 데 사용되기도 한다.
+ex) public Person(String name) {
+		personName = name;
+		personAge = "unknown";
+		} //personName, personAge: 클래스의 데이터 필드
+		  //name: 매개변수. personName에 값을 전달해 초기화
+		  // "unknown": 매개변수에 값이 전달되지 않았을 떄 대신 				     전달될 값
+
+*** 필드(field): 클래스 안에 있는 변수 (속성)
+*** public field: 클래스 외부에서 액세스할 수 있음. 객체마다 값이 다름. (인스턴스가 생성될 때 부여되는 매개변수의 값이 다르기 때문)
+ex) public string modelName; //modelName: public field
+*** static field: 모든 객체가 하나의 값을 공유함. 객체가 아닌 클래스 자체에 속함.
+ex) public static string defaultName; //defaultName: static field
+
+*** 표현식(expression): 값을 도출할 수 있는 코드는 전부 표현식. 연산을 해서 숫자로 결과가 나오면 전부 표현식인듯...
+*** 문장(statement): 값을 만들지 않는 코드. 일(동작)을 수행함. 변수 선언, 대입, if문, 반복문 등이 있음.
+*** 표현식 본문(expression-bodied): expression을 이용해 statement 구조를 줄여 쓰는 문법. C#에서 중괄호 {}를 생략하고 =>로 간단히 표현할 수 있음.
+
+- 정적 생성자
+정적 데이터를 초기화하는 데 사용되는 생성자. 한 번만 호출되며, 매개변수가 없음. 클래스는 정적 생성자를 하나만 가질 수 있음. 직접 호출 불가. 자동으로 호출됨. 
+ex) static Car() { //static constructor
+		carcount = 100; //carCount: static field 
+		}
+
+=================================
+#실습
+콘솔을 만들 때 생성된 Classes_M1
+솔루션 탐색기에서 총 2개가 있을텐데, 위가 솔루션, 아래가 프로젝트.
+두 기능이 다르기 때문에 구분해서 사용해야됨.
+빌드는 솔루션에서, 디버그는 프로젝트에서.
+
+readonly 키워드는 읽기 전용. 생성자 안에서만 값 할당 가능. 이후 값 변경 불가. 객체가 만들어질 때 정해진 값이 이후에는 바뀌지 않는 것을 보장함.
+ex) public readonly string CustomerId;
+this 키워드로 클래스의 현재 인스턴스 참조함. 필드와 매개변수 이름이 같을 때 사용함. 필드를 명확히 하고 싶을 때 사용하면 가독성이 올라감.
+ex) this.CustomerId = ~~~~;
+
+this.CustomerId = (s_nextCustomerId++).ToString("D10");
+해석:  s_nextCustomerId++: 사용 후 값을 1 증가
+	.ToString("D10"): 숫자를 10자리 문자열로 포맷
+	ex) 123 -> 0000000123
+즉, 현재 고객의 아이디가 0000000123이라면 다음 고객의 아이디는 0000000124로 자동 증가되어 할당.
+s_nextCustomerId는 다음 아이디를 저장하는 static field.
+
+=================================
+https://learn.microsoft.com/en-us/training/modules/create-classes-objects-c-sharp/1-introduction
