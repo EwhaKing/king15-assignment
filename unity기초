@@ -1,0 +1,128 @@
+~씬 둘러보기~
+
+플라이스루: 씬 날면서 둘러보기
+오른쪽마우스+ w/a/s/d, Q/R
+
+더 빠르게 움직이려면 shift까지 누르기
+
+포커스: hierarchy창에서 게임오브젝트 선택 후 F누르면 그것으로 focus
+
+조작 순서대로 QWERTY
+
+ALT+ RSM= 카메라 돌리기
+ALT+ LSM= 카메라 줌인아웃
+
+마우스 오른/왼과 alt, wasd, qe 누르면 뷰 조작 가능, shift는 달리기
+
+
+
+~카메라~
+
+직교카메라: 원근법X
+원근카메라: 원근법O, 시야각(Field of View)으로 시야 설정. FoV가 클수록 시야가 넓어짐
+
+물리적 카메라: 실사 영상, 영화 같은 느낌을 줄 때
+
+카메라 Projection을 Perspective로 설정, Physical Camera 체크
+
+이미지가 렌더링(또는 "촬영")되는 영역의 물리적 크기인 Sensor Size, 렌즈와 필름/센서 사이의 거리인 Focal Length
+
+Sensor size, FoV, Focal length 셋 다 조절하며 물리적 카메라 조정
+
+
+~물리엔진~
+
+충돌이 인식되려면 게임 오브젝트에 Rigidbody 컴포넌트가 연결되어 있어야 함
+
+게임 오브젝트가 물리 엔진의 영향을 받게 하려면 Collider 컴포넌트를 추가해야 함
+
+Collider의 Is Trigger: 체크하면 그 오브젝트를 다른 오브젝트가 통과할 수 있고 collider 영역에 들어가거나 나올 때 이벤트 호출 가능
+
+Rigidbody의 Is Kinematic: 체크하면 다른 오브젝트에 영향을 주지만 자신이 영향 받지는 않음
++에니메이션 엔진 vs 물리 엔진 제어권 설정할 때도 씀
+
+Rigidbody의 충돌 점검 방식, 충돌 점검 속도를 설정할 수 있음
+충돌 점검 방식: None / Interpolate / Extrapolate (extra가 더 매끄러움)
+충돌 점검 속도: Discrete / Continuos(정적과 빠른이가 상호작용) / Continuos dynamic(빠른이와 빠른이) / Continuos Speculative(예측 기반)
+
+Rigidbody의 Constraints: X,Y,Z축 고정할 수 있음
+
++Project Settings > Physics에서 물리엔진의 요소 설정 가능
+
+
+~물리엔진의 스크립트~
+
+Collider 함수들로 다른오브젝트와 상호작용
+ OnCollisionEnter (Collision){ } : 충돌 인식 시
+OC Stay : 충돌 중
+OC Exit : 충돌 정지
+
+예)
+void OnCollisionEnter(Collision collision){    - - > 여기서 매개변수는 충돌한 다른 게임오브젝트. collision.name등으로 참조 가능
+    if(collision.gameObject.CompareTag("Enemy"){
+             //hit the enemy
+     }
+}
+
+Rigidbody의 함수   
+bool rigidbody.useGravity : 중력 비/활성화(true) 
+rb.AddForce(Vector3) : 특정 방향으로 힘 추가
+rb.AddTorque(Vector3, Force Mode): 축 주위에 회전력 추가
+
+예) rb.AddTorque(Vector3.up * torqueStrength, ForceMode.Impulse);
+
+
+*Vector3: (0,0,0) x,y,z축
+Vector3.zero/ .up(0,1,0) / .right(1,0,0) / .forward(0,0,1)
+예) Vector3 position = new Vector3(10,0,5);
+
+*Force Mode: 힘 적용 방식
+ForceMode.Force(지속적인 힘-ex.중력) / .Impulse(순간적인 힘-ex.폭발, 순간이동) / 
+.VelocityChange(오브젝트의 질량을 고려하지 않고 속도만 즉시 변화시킴) / 
+.Acceleration(오브젝트의 질량을 고려하지 않고 일정하게 가속)
+
+
+
+~Update 함수~
+Update: 프레임당 한 번 호출됨
+FixedUpdate: 프레임당 여러 번 호출됨. 고정된 간격을 두고 계산이 수행됨
+물리 계산의 대부분은 FixedUpdate에서 호출됨. 
+
+
+커스텀 Physic Material: Friction, Bounciness를 커스텀하여 게임오브젝트에 추가할 수 있다
+
+
+~Joint 컴포넌트~
+Joint는 Rigidbody에 힘을 가해 움직이도록 한다, Rigidbody의 움직임 제어
+
+Character Joint: 캐릭터의 관절과 비슷. 자유도에 따라 고정된 범위 내에서 움직임 ex) 사람 목은 360도 돌아가지 않는다
+Configurable Joint: 자유도 관계X ex) 인형 팔은 다 꺾인다
+Fixed Joint: 오브젝트 두 개의 움직임을 연결해서 같이 움직임
+Hinge Joint: 두 개의 Rigidbody를 묶어 Rigidbody가 Anchor에서 특정 axis를 중심으로 회전하게 함
+Spring Joint: 두 Rigidbody사이에 탄성력 추가, 스프링처럼 작용(거리 가변) ex) 흔들다리
+
+
+~레이캐스팅~ 
+Raycasting-빛던짐. 오브젝트 간 빛이나 보이지 않는 연결을 캐스트함
+
+origin: 광선의 시작점
+direction: 광선의 방향
+maxDistance: 광선의 충돌을 검사하는 최대 거리
+layerMask: 광선을 캐스트할 때 콜라이더를 선택적으로 무시하는 데 사용하는 레이어 마스크
+queryTriggerInteraction: 해당 쿼리의 트리거 충돌 여부를 지정
+
+예)
+Physics.Raycast (Vector3 Origin, Vector3 Direction, RaycastHit Info, float Distance, int Layermask)
+
+ㄴRaycastHit Info: 광선이 충돌한 지점의 정보를 담는 RaycastHit 객체
+Info.point/ .collider / .distance 등의 정보
+
+
+~레이어와 레이어들 간의 충돌~
+게임오브젝트의 기본 레이어에 기본 동작이 할당되면 비효율적임 -> 새 레이어에 오브젝트 할당
+이런 레이어들 간의 충돌 관계는 충돌 매트릭스에 따라 결정됨
+
+예) you want Layer 1 to collide with Layer 2 and 3, but not with Layer 1
+=layer는 같은 종류의 오브젝트들을 묶어서 관리함. 
+=결국 레이어들 간의 충돌 관계는 어떤 오브젝트 종류와 충돌이 가능하게 할 건지 정하는 것과 같음. 그리고 이걸 project settings > physics > settings > Layer Collision Matrix에서 결정
+
