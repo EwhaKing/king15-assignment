@@ -1,0 +1,14 @@
+C:\study\myC#\My CSharp Projects\Classes_M1\bin\Debug\net9.0\Classes_M1.exe
+C:\study\myC#\My CSharp Projects\Classes_M1\bin\Debug\net9.0\Classes_M1.deps.json
+C:\study\myC#\My CSharp Projects\Classes_M1\bin\Debug\net9.0\Classes_M1.runtimeconfig.json
+C:\study\myC#\My CSharp Projects\Classes_M1\bin\Debug\net9.0\Classes_M1.dll
+C:\study\myC#\My CSharp Projects\Classes_M1\bin\Debug\net9.0\Classes_M1.pdb
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.GeneratedMSBuildEditorConfig.editorconfig
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.AssemblyInfoInputs.cache
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.AssemblyInfo.cs
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.csproj.CoreCompileInputs.cache
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.dll
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\refint\Classes_M1.dll
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.pdb
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\Classes_M1.genruntimeconfig.cache
+C:\study\myC#\My CSharp Projects\Classes_M1\obj\Debug\net9.0\ref\Classes_M1.dll
